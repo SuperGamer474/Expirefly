@@ -1,23 +1,29 @@
 import SwiftUI
 
+#if os(Android)
+func main() {
+    skipRunApp(ContentView())
+}
+#else
 @main
-struct ExpireflyApp {
-    static func main() {
-        runApp(ContentView())
+struct ExpireflyApp: App {
+    var body: some Scene {
+        WindowGroup {
+            ContentView()
+        }
     }
 }
+#endif
 
 struct ContentView: View {
     @State var items: [String] = ["Milk", "Eggs", "Cheese"]
 
     var body: some View {
         VStack(spacing: 20) {
-            // Title
             Text("Expirefly Template")
                 .font(.title)
                 .padding()
 
-            // Items List
             if items.isEmpty {
                 Text("No items added yet 🪄")
                     .foregroundColor(.gray)
@@ -35,6 +41,7 @@ struct ContentView: View {
                             .padding()
                             .background(Color.gray.opacity(0.1))
                             .cornerRadius(8)
+                            // simple cross-platform delete: tap the item
                             .onTapGesture(count: 2) {
                                 deleteItem(at: index)
                             }
@@ -44,7 +51,6 @@ struct ContentView: View {
                 }
             }
 
-            // Add Item Button
             Button(action: addItem) {
                 HStack {
                     Image(systemName: "plus.circle.fill")
