@@ -355,13 +355,6 @@ jobs:
         with:
           fetch-depth: 0
 
-      - name: Cache Android SDK
-        uses: actions/cache@v4
-        with:
-          path: ~/Library/Android/sdk
-          key: android-sdk-${{ runner.os }}-api33-buildtools33.0.0
-          restore-keys: android-sdk-${{ runner.os }}-
-
       - name: Set up Android SDK
         uses: android-actions/setup-android@v3
         with:
