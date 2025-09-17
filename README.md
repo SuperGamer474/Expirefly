@@ -1,8 +1,8 @@
-![Expirefly Logo](icon.png)
-
 # Expirefly - Expiry, handled.
 
-Expirefly is an app to handle food expiry efficiently.
+Expirefly is an app to handle food expiry efficiently.  
+
+<img height="200" src="icon.png">
 
 ---
 
