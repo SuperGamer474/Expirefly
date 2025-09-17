@@ -10,7 +10,7 @@ struct ExpireflyApp: App {
 }
 
 struct ContentView: View {
-    @State private var items: [String] = ["Milk", "Eggs", "Cheese"]
+    @State var items: [String] = ["Milk", "Eggs", "Cheese"]
 
     var body: some View {
         NavigationStack {
