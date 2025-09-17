@@ -1,67 +1,69 @@
 import SwiftUI
 
-@main
-struct ExpireflyApp: App {
-    var body: some Scene {
-        WindowGroup {
-            ContentView()
-        }
-    }
-}
-
 struct ContentView: View {
     @State var items: [String] = ["Milk", "Eggs", "Cheese"]
 
     var body: some View {
-        NavigationStack {
-            VStack(spacing: 20) { // added spacing for cleaner layout
-                if items.isEmpty {
-                    Text("No items added yet 🪄")
-                        .foregroundColor(.gray)
-                        .padding()
-                } else {
-                    List {
-                        ForEach(items, id: \.self) { item in
+        VStack(spacing: 20) {
+            // Title
+            Text("Expirefly Template")
+                .font(.title)
+                .padding()
+
+            // Items List
+            if items.isEmpty {
+                Text("No items added yet 🪄")
+                    .foregroundColor(.gray)
+                    .padding()
+            } else {
+                ScrollView {
+                    VStack(spacing: 10) {
+                        ForEach(items.indices, id: \.self) { index in
                             HStack {
-                                Text(item)
+                                Text(items[index])
                                 Spacer()
                                 Text("Expires soon")
                                     .foregroundColor(.red)
-                                    .font(.caption)
+                            }
+                            .padding()
+                            .background(Color.gray.opacity(0.1))
+                            .cornerRadius(8)
+                            // Swipe to delete replacement for cross-platform
+                            .contextMenu {
+                                Button("Delete") {
+                                    deleteItem(at: index)
+                                }
                             }
                         }
-                        .onDelete(perform: deleteItem)
                     }
-                    .listStyle(.insetGrouped) // nicer list style
-                }
-                
-                Button(action: addItem) {
-                    Label("Add Item", systemImage: "plus.circle.fill") // adds icon
-                        .padding()
-                        .frame(maxWidth: .infinity)
-                        .background(Color.green.opacity(0.85))
-                        .foregroundColor(.white)
-                        .cornerRadius(10)
-                        .padding(.horizontal)
-                        .shadow(radius: 3)
+                    .padding(.horizontal)
                 }
             }
-            .navigationTitle("Expirefly Template")
+
+            // Add Item Button
+            Button(action: addItem) {
+                HStack {
+                    Image(systemName: "plus.circle.fill")
+                    Text("Add Item")
+                }
+                .padding()
+                .frame(maxWidth: .infinity)
+                .background(Color.green.opacity(0.85))
+                .foregroundColor(.white)
+                .cornerRadius(10)
+                .padding(.horizontal)
+                .shadow(radius: 3)
+            }
         }
+        .padding()
     }
-    
+
     // Functions
     func addItem() {
         items.append("New Item")
     }
-    
-    func deleteItem(at offsets: IndexSet) {
-        items.remove(atOffsets: offsets)
-    }
-}
 
-struct ContentView_Previews: PreviewProvider {
-    static var previews: some View {
-        ContentView()
+    func deleteItem(at index: Int) {
+        items.remove(at: index)
     }
 }
