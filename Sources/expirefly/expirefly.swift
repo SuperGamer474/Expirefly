@@ -35,11 +35,8 @@ struct ContentView: View {
                             .padding()
                             .background(Color.gray.opacity(0.1))
                             .cornerRadius(8)
-                            // Cross-platform delete
-                            .contextMenu {
-                                Button("Delete") {
-                                    deleteItem(at: index)
-                                }
+                            .onTapGesture(count: 2) {
+                                deleteItem(at: index)
                             }
                         }
                     }
