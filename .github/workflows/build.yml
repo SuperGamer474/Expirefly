@@ -356,36 +356,23 @@ jobs:
         with:
           fetch-depth: 0
 
-      - name: Install Homebrew
-        run: |
-          set -e
-          if ! command -v brew >/dev/null 2>&1; then
-            /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-            echo 'eval "$(/opt/homebrew/bin/brew shellenv)"' >> $GITHUB_ENV || true
-            eval "$(/opt/homebrew/bin/brew shellenv)" || true
-          fi
-          brew update || true
-          brew --version
-        shell: bash
-
-      - name: Install Skip CLI
-        run: |
-          set -e
-          brew tap skiptools/skip || true
-          brew install skiptools/skip/skip || true
-          skip --version || true
-        shell: bash
+      - name: Cache Android SDK
+        uses: actions/cache@v4
+        with:
+          path: ~/Library/Android/sdk
+          key: android-sdk-${{ runner.os }}-api33-buildtools33.0.0
+          restore-keys: android-sdk-${{ runner.os }}-
 
       - name: Set up Android SDK
         uses: android-actions/setup-android@v3
         with:
-          cmdline-tools-version: '16.0'   # default cmdline tools version (change if you want)
-          api-levels: '33'               # install API 33 platforms (change if you need a different SDK)
-          build-tools: '33.0.0'          # build-tools version
-          cache: true
+          cmdline-tools-version: '16.0'
+          packages: 'platforms;android-33 build-tools;33.0.0'
+          accept-android-sdk-licenses: true
 
       - name: Add Android tools to PATH
         run: |
+          echo "ANDROID_HOME=${HOME}/Library/Android/sdk" >> $GITHUB_ENV
           echo "ANDROID_SDK_ROOT=${HOME}/Library/Android/sdk" >> $GITHUB_ENV
           echo "${HOME}/Library/Android/sdk/cmdline-tools/latest/bin" >> $GITHUB_PATH
           echo "${HOME}/Library/Android/sdk/platform-tools" >> $GITHUB_PATH
