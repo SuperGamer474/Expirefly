@@ -389,13 +389,6 @@ jobs:
           skip android sdk install
         shell: bash
 
-      - name: Install Swift Android SDK
-        run: |
-          set -e
-          # This downloads/installs the Swift Android support that Skip needs
-          skip android sdk install
-        shell: bash
-
       - name: Build .apk for Android
         run: |
           set -e
