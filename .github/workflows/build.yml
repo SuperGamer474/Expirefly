@@ -433,9 +433,22 @@ jobs:
           TAG="v$VERSION"
           echo "Creating release $TAG with notes:"
           printf '%s\n' "$CHANGELOG"
+
+          # Paths to artifacts
           DEVICE_IPA="build/com.supergamer474.expirefly-unsigned-ios.ipa"
+          ANDROID_APKS=(build/android/**/*.apk)
+
+          # Check APKs exist
+          for apk in "${ANDROID_APKS[@]}"; do
+            if [ ! -f "$apk" ]; then
+              echo "Warning: APK not found at $apk"
+            fi
+          done
+
+          # Create GitHub release with IPA + APKs
           gh release create "$TAG" \
             "$DEVICE_IPA" \
+            "${ANDROID_APKS[@]}" \
             --title "Expirefly v$VERSION" \
             --notes "$CHANGELOG" \
             --repo "$GITHUB_REPOSITORY"
