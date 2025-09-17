@@ -1,9 +1,11 @@
-// swift-tools-version: 5.10
+// swift-tools-version:5.10
 import PackageDescription
 
 let package = Package(
     name: "expirefly",
-    platforms: [.iOS(.v16), .android(.v34)],
+    platforms: [
+        .iOS(.v16)
+    ],
     products: [
         .library(name: "expirefly", targets: ["expirefly"]),
     ],
