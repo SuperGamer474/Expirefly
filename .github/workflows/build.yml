@@ -348,7 +348,6 @@ jobs:
   build-android-apk:
     name: Build Android APK
     runs-on: macos-15
-    needs: build-unsigned-ipa
     timeout-minutes: 60
     steps:
       - name: Checkout repo
