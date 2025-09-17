@@ -1,5 +1,12 @@
 import SwiftUI
 
+@main
+struct ExpireflyApp {
+    static func main() {
+        runApp(ContentView())
+    }
+}
+
 struct ContentView: View {
     @State var items: [String] = ["Milk", "Eggs", "Cheese"]
 
@@ -28,7 +35,7 @@ struct ContentView: View {
                             .padding()
                             .background(Color.gray.opacity(0.1))
                             .cornerRadius(8)
-                            // Swipe to delete replacement for cross-platform
+                            // Cross-platform delete
                             .contextMenu {
                                 Button("Delete") {
                                     deleteItem(at: index)
