@@ -1,4 +1,4 @@
-![Expirefly Logo](logo.png)
+![Expirefly Logo](icon.png)
 
 # Expirefly - Expiry, handled.
 
