@@ -28,13 +28,13 @@ targets:
       ASSETCATALOG_COMPILER_APPICON_NAME: "AppIcon"
       SWIFT_OPTIMIZATION_LEVEL: "-Owholemodule"
     dependencies:
-      - package: skip-fuse-ui / SkipFuseUI
+      - package: skip-fuse-ui/SkipFuseUI
     info:
       path: "Info.plist"
       properties:
         CFBundleDisplayName: "Expirefly"
         CFBundleName: "expirefly"
         CFBundleVersion: "1"
-        CFBundleShortVersionString: "0.1.0"
+        CFBundleShortVersionString: "0.1.1"
         UILaunchStoryboardName: "LaunchScreen"
         NSPrincipalClass: "UIApplication"

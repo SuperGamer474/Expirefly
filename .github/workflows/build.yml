@@ -377,6 +377,18 @@ jobs:
           echo "${HOME}/Library/Android/sdk/platform-tools" >> $GITHUB_PATH
         shell: bash
 
+      - name: Install Skip
+        run: |
+          brew install skiptools/skip/skip
+        shell: bash
+
+      - name: Install Swift Android SDK
+        run: |
+          set -e
+          # This downloads/installs the Swift Android support that Skip needs
+          skip android sdk install
+        shell: bash
+
       - name: Install Swift Android SDK
         run: |
           set -e
